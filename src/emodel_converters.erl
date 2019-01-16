@@ -167,6 +167,11 @@ datetime(Bin) when is_binary(Bin) ->
         _ ->
             {error, <<"bad datetime">>}
     end;
+datetime({{Y, M, D}, {Hh, Mm, Ss}} = DateTime) when is_integer(Hh), is_integer(Mm), is_integer(Ss), Hh >=0, Hh =< 24, Mm >= 0, Mm =< 60, Ss >= 0, Ss =< 60 ->
+    case calendar:valid_date(Y, M, D) of
+       true ->  {ok, DateTime};
+       false -> {error, <<"bad datetime">>}
+    end;
 datetime(_Other) ->
     {error, <<"bad datetime">>}.
 
