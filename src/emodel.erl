@@ -160,7 +160,7 @@ from_map(Map, Model, ModelDescription0, Opts) when is_map(Map) ->
                         {ok, M};
                     Required ->
                         case maps:find(Name, Map) of
-                            {ok, null} when Required =:= required ->
+                            {ok, Value} when ?IS_UNDEFINED(Value) andalso Required =:= required ->
                                 {error, [{Name, required}]};
                             {ok, Value} ->
                                 case Setter(Value, M) of
