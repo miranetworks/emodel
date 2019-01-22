@@ -175,6 +175,8 @@ datetime({{Y, M, D}, {Hh, Mm, Ss}} = DateTime) when is_integer(Hh), is_integer(M
 datetime(_Other) ->
     {error, <<"bad datetime">>}.
 
+integer(infinity) ->
+    {ok, infinity};
 integer(Int) when is_integer(Int) ->
     {ok, Int};
 integer(Float) when is_float(Float) -> %% Support float format (1.0)
